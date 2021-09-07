@@ -1,0 +1,5 @@
+Loginpage
+signup page
+password resetpage
+homepage (Guest)
+homepage (User)
