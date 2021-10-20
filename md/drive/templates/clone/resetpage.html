@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel = "stylesheet" href = "/css/login.css">
+	</head>
+	<style>
+		.main-form{
+			height: 320px !important;
+		}
+	</style>
+	<body background = '/images/background.jpg'>
+		<div id="tsparticles"></div>
+		<div class="main-form">
+			<h3>Reset Password</h3>
+		
+			<label for="email">Email</label>
+			<input type = 'email' name = 'email' placeholder = 'Enter Email' maxlength = '<%= email_length %>' required>
+
+			<form action = '/reset' method = 'post'>
+				<input type = 'submit' value = 'Reset' class="reset-button">
+			</form>
+
+			<div>
+				<% if (error == 1) { %>
+					<font color = 'red' size = '4'>Email not Found.</font>
+				<% } else if (check == 2) { %>
+					<font color = 'red' size = '4'>Password sent to your email.</font>
+				<% } %>
+			</div>
+		</div>			
+		</form>
+	</body>
+</html>
