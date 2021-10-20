@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <link rel = "stylesheet" href = "{% static 'userconfig.css' %}">
+  </head>
+  <body background = "{% static '/images/background.jpg' %}" style="background-repeat: no-repeat; background-size: cover;">
+	  #<h2 style="color: #fff; text-align: center; padding-top: 5px;">User Config {{request.user.username}}</h2>
+
+    <div id="tsparticles"></div>
+
+    <div class="home-logout">
+        <form action="/home" method="get">
+          <button type="submit" value="Home" class="login-button">Home</button>
+        </form>
+
+        <form action="/logout" method="post">
+            <button type="submit" value="Logout" class="login-button">
+            Logout
+            </button>
+        </form>
+    </div>
+
+    <div class="flex-container">
+      <div>
+        <form action="/update_password" method="post">
+          <h3>Update Password</h3>
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter Current Password"
+            maxlength="<%= password_length %>"
+            required
+          />
+          <input
+            type="password"
+            name="new_password"
+            placeholder="Enter Current Password"
+            maxlength="<%= password_length %>"
+            required
+          />
+          <input
+            type="password"
+            name="check_new_password"
+            placeholder="Re-Enter Current Password"
+            maxlength="<%= password_length %>"
+            required
+          />
+          <!-- <% if (error==4) { %>
+          <font size="4" color="red"
+            ><b
+              ><i
+                >Re-Enter new password field not equal to new password field.</i
+              ></b
+            ></font
+          >
+          <% } else if (error==5) { %>
+          <font size="4" color="red"
+            ><b
+              ><i
+                >Password must be within <%= password_length %> characters of
+                length.</i
+              ></b
+            ></font
+          >
+          <% } else if (error==6) { %>
+          <font size="4" color="red"
+            ><b
+              ><i
+                >Password must be <%= minimum_password_length %> or more in
+                length and must be alphanumeric.</i
+              ></b
+            ></font
+          >
+          <% } else if (error==7) { %>
+          <font size="4" color="red"
+            ><b><i>Wrong password entered</i></b></font
+          >
+          <% } %> -->
+          <input type="submit" value="Submit" class="login-button" style="font-size: 18px;"/>
+        </form>
+      </div>
+      <div>
+        <form action="/update_email" method="post">
+          <h3>Update Email</h3>
+          <input
+            type="email"
+            name="new_email"
+            placeholder="Enter New Email"
+            maxlength="<%= email_length %>"
+            value="{{request.user.email}}"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter Password"
+            maxlength="<%= password_length %>"
+            required
+          />
+<!--           <% if (error==8) { %>
+          <font size="4" color="red"
+            ><b
+              ><i
+                >Email more than <%= email_length %> characters in length.</i
+              ></b
+            ></font
+          >
+          <% } else if (error==9) { %>
+          <font size="4" color="red"
+            ><b><i>Wrong password entered</i></b></font
+          >
+          <% } %> -->
+          <input type="submit" value="Submit" class="login-button" style="font-size: 18px;"/>
+        </form>
+      </div>
+      <div>
+        <form action="/update_username" method="post">
+			<h3>Update Username</h3>
+          <input
+            type="text"
+            name="update_username"
+            placeholder="Enter Username"
+            maxlength="<%= username_length %>"
+            value="{{request.user.username}}"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter Password"
+            maxlength="<%= password_length %>"
+            required
+          />
+<!--           <% if (error==1) { %>
+          <font size="4"
+            ><b
+              ><i
+                >Username more than <%= username_length %> characters in
+                length.</i
+              ></b
+            >
+          </font>
+          <% } else if (error==2) { %>
+          <font size="4"
+            ><b><i>Wrong password entered</i></b></font
+          >
+          <% } %> -->
+          <input type="submit" value="Submit" class="login-button" style="font-size: 18px;"/>
+        </form>
+      </div>
+	  <div>
+		<form action = '/delete_user' method = 'post'>
+			<h3>Delete Account</h3>
+				<input type = 'password' name = 'password' placeholder = 'Enter Password' maxlength = '<%= password_length %>' required>
+<!-- 				<% if (error == 10) { %>
+					<font size = '4' color = 'red'><b><i>Wrong password entered.</i></b></font>
+				<% } %> -->
+				<input type="submit" value="Submit" class="login-button" style="font-size: 18px;"/>
+		</form>
+	    </div>
+    </div>
+    <div class="home-logout">
+      <form action="/signin" method="get">
+          <button type="submit" value="Login" class="login-button">
+          Login
+          </button>
+      </form>
+    </div>
+  </body>
+</html>

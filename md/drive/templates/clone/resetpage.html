@@ -1,20 +1,21 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 	<head>
-		<link rel = "stylesheet" href = "/css/login.css">
+		<link rel = "stylesheet" href = "{% static 'login.css' %}">
 	</head>
 	<style>
 		.main-form{
 			height: 320px !important;
 		}
 	</style>
-	<body background = '/images/background.jpg'>
+	<body background = "{% static '/images/background.jpg' %}">
 		<div id="tsparticles"></div>
 		<div class="main-form">
 			<h3>Reset Password</h3>
 		
 			<label for="email">Email</label>
-			<input type = 'email' name = 'email' placeholder = 'Enter Email' maxlength = '<%= email_length %>' required>
+			<input type = 'email' name = 'email' placeholder = 'Enter Email' required>
 
 			<form action = '/reset' method = 'post'>
 				<input type = 'submit' value = 'Reset' class="reset-button">

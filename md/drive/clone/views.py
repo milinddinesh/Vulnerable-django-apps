@@ -23,7 +23,7 @@ def signin(request):
             login(request,user)
             return redirect('index')
         else :
-            messages.error(request,passw)
+            messages.error(request,"Bad credentials!")
             return redirect('home')
     return render(request,"clone/loginpage.html")
 
@@ -41,7 +41,11 @@ def signup(request):
             myuser.last_name = 'thangappan'
 
             myuser.save()
-            messages.success(request,username)
+            messages.success(request,"User created successfully")
             return redirect('signin')
 
     return render(request,"clone/signuppage.html")
+
+def configPage(request):
+    #messages.success(request,request.user)
+    return render(request,"clone/userconfig.html")
