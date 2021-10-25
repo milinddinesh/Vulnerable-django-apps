@@ -5,6 +5,7 @@ from django.contrib.auth.models import User #You'll probably have to remove this
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.core.files.storage import FileSystemStorage
+from .forms import FileForm
 # from .models import FilesUpload
 # Create your views here.
 def home(request):
@@ -53,11 +54,10 @@ def configPage(request):
     return render(request,"clone/userconfig.html")
 
 def upload_file(request):
-    upload_file = request.FILES['foo']
-    fs = FileSystemStorage()
-    fs.save(upload_file.name,upload_file)
-    # document = FilesUpload.objects.create(file = upload_file)
-    # document.save()
-    print(upload_file.name)
-    HttpResponse("Your file was uploaded")
-    return render(request,"clone/index.html")
+    form = FileForm()
+    return render(request,'clone/index.html',{
+        'form': form
+    })
+
+def view_files(request):
+    return render(request,"clone/list.html")

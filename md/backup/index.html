@@ -26,13 +26,11 @@ input {
 						<table>
 							<tr>
 								<td valign = 'middle'>
-									<form action = '/view_files' method = 'post'>
-										{% csrf_token %}
-										<input type = 'submit' value = 'Show files'>
+									<form action = '/delete_all_files' method = 'post'>
+										<input type = 'submit' value = 'Delete all Files'>
 									</form>
 								</td>
 								<td valign = 'middle'>
-									<!-- will need this for broken authentication -->
 									<form action = '/user_config' method = 'get'>
 										<input type = 'submit' value = 'Settings'>
 									</form>
@@ -62,14 +60,14 @@ input {
 				<br>
 					<tr>
 						<td>
-							<!-- <font color = 'red' size = '7'><%= file %></font> -->
+							<font color = 'red' size = '7'><%= file %></font>
 						</td>
-<!-- 						<td>
+						<td>
 							<form action = '/delete_file' method = 'post'>
 								<input type = 'hidden' name = 'delete_file' value = '<%= file %>'>
 								<input type = 'submit' value = 'Delete this File'>
 							</form>
-						</td> -->
+						</td>
 					</tr>
 			</table>
 		</center>

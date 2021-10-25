@@ -1,0 +1,46 @@
+<html>
+	<head>
+		{% load static %}
+	</head>
+<style>
+input {
+    display: block;
+    height: 50px;
+    width: 100%;
+	background-color: violet;
+	border: none;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+</style>
+	<body background = "{% static '/images/background.jpg' %}">
+		<center>
+			<table width = '100%'>
+				<tr>
+					<td>
+						<font size = '6'></font>
+					</td>
+					<td align = 'right' valign = 'middle'>
+						<table>
+							<tr>
+								<td valign = 'middle'>
+									<form action = '/index' method = 'post'>
+                                        {% csrf_token %}
+										<input type = 'submit' value = 'Back'>
+									</form>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+				</tr>
+				<br>
+			</table>
+		</center>
+	</body>
+</html>

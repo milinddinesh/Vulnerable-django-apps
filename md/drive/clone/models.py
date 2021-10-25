@@ -7,4 +7,7 @@ from django.db import models
 class Files(models.Model):
     filename = models.CharField(max_length=100)
     owner = models.CharField(max_length=100)
-    pdf = models.FileField(upload_to='books/pdfs/')
+    pdf = models.FileField(upload_to='media/users/')
+
+    def __str__(self) :
+        return self.title

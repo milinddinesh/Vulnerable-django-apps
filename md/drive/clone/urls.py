@@ -11,6 +11,7 @@ urlpatterns = [
     path('signup',views.signup,name = 'signup'),
     path('index',views.index,name = 'index'),
     path('user_config',views.configPage,name = 'user_config'),
-    path('upload_file',views.upload_file,name='upload_file')
+    path('upload_file',views.upload_file,name='upload_file'),
+    path('view_files',views.view_files,name = 'view_files'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
