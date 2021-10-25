@@ -53,14 +53,12 @@ input {
 							{% csrf_token %}
 							<input type = 'file' name = 'foo' value = 'Load Files' multiple required>
 							<button type="submit" value="Submit">Upload</button>
-							<!-- <input type = 'Submit' value = 'Upload'> -->
 						</form>
 					</td>
 					<td>
 					</td>
 				</tr>
 				<br>
-				<% user_files.forEach(function(file) { %>
 					<tr>
 						<td>
 							<font color = 'red' size = '7'><%= file %></font>
@@ -72,7 +70,6 @@ input {
 							</form>
 						</td>
 					</tr>
-				<% }); %>
 			</table>
 		</center>
 	</body>
