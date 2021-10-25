@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User #You'll probably have to remove this when implementing sqli
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.core.files.storage import FileSystemStorage
+# from .models import FilesUpload
 # Create your views here.
 def home(request):
     return render(request,"clone/homepage.html")
@@ -49,3 +51,13 @@ def signup(request):
 def configPage(request):
     #messages.success(request,request.user)
     return render(request,"clone/userconfig.html")
+
+def upload_file(request):
+    upload_file = request.FILES['foo']
+    fs = FileSystemStorage()
+    fs.save(upload_file.name,upload_file)
+    # document = FilesUpload.objects.create(file = upload_file)
+    # document.save()
+    print(upload_file.name)
+    HttpResponse("Your file was uploaded")
+    return render(request,"clone/index.html")
