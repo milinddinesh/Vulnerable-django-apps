@@ -1,0 +1,38 @@
+user based views
+user verification for files
+Login required mixin ?
+
+https://docs.djangoproject.com/en/3.2/topics/http/file-uploads/
+
+https://www.javatpoint.com/django-file-upload
+
+https://www.quora.com/How-do-I-have-a-user-uploadable-directory-in-Django-but-ensure-that-only-the-user-who-uploaded-the-file-has-access-to-it
+
+https://blog.nvisium.com/django-vs-the-owasp-top-10-part-1
+
+https://stackoverflow.com/questions/24146619/django-user-specific-folders/24146732
+
+https://stackoverflow.com/questions/30679661/how-to-create-separate-folder-for-each-user-in-django-and-let-user-upload-file-i
+
+https://docs.djangoproject.com/en/3.2/topics/http/file-uploads/
+
+https://stackoverflow.com/questions/28166784/restricting-access-to-private-file-downloads-in-django
+
+https://stackoverflow.com/questions/7296642/django-understanding-x-sendfile
+
+I think this is the one that will work 
+https://dev.to/joshwizzy/how-to-serve-private-media-files-with-django-41e0
+
+https://www.osohq.com/post/building-django-app-with-data-access-control
+
+https://coderbook.com/@marcus/how-to-restrict-access-with-django-permissions/
+
+https://docs.djangoproject.com/en/2.1/topics/auth/default/#the-loginrequired-mixin
+
+https://stackoverflow.com/questions/33086777/set-user-permissions-for-specific-views-in-django
+
+https://docs.djangoproject.com/en/1.8/topics/auth/default/#django.contrib.auth.decorators.permission_required
+
+https://docs.djangoproject.com/en/1.8/topics/auth/default/#django.contrib.auth.decorators.user_passes_test
+
+
