@@ -53,6 +53,8 @@ def configPage(request):
     #messages.success(request,request.user)
     return render(request,"clone/userconfig.html")
 
+#function left incomplete
+#function for file handling . 
 def upload_file(request):
     form = FileForm()
     return render(request,'clone/index.html',{

@@ -4,7 +4,7 @@ from django.db import models
 # class FilesUpload(models.Model):
     # file = models.FileField()
 
-class Files(models.Model):
+class Files_Upload(models.Model):
     filename = models.CharField(max_length=100)
     owner = models.CharField(max_length=100)
     pdf = models.FileField(upload_to='media/users/')
