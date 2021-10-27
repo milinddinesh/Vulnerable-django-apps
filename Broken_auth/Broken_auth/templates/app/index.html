@@ -5,56 +5,31 @@
 <style>
 input {
     display: block;
-    height: 50px;
+    height: 70px;
     width: 100%;
 	background-color: violet;
 	border: none;
     padding: 0 10px;
-    margin-top: 8px;
+    margin-top: 275px;
     font-size: 14px;
     font-weight: 300;
+}
+button {
+	margin-top: 10px;
+	width: 90px;
+	margin-left: 90px;
 }
 </style>
 	<body background = "{% static '/images/background.jpg' %}">
 		<center>
-			<table width = '100%'>
-				<tr>
-					<td>
-						<font size = '6'></font>
-					</td>
-					<td align = 'right' valign = 'middle'>
-						<table>
-							<tr>
-								<td valign = 'middle'>
-									<form action = '/view_files' method = 'post'>
-										{% csrf_token %}
-										<input type = 'submit' value = 'Show files'>
-									</form>
-								</td>
-								<td valign = 'middle'>
-									<!-- will need this for broken authentication -->
-									<form action = '/user_config' method = 'get'>
-										<input type = 'submit' value = 'Settings'>
-									</form>
-								</td>
-								<td valign = 'middle'>
-									<form action = '/logout' method = 'post'>
-										<input type = 'submit' value = 'Logout'>
-									</form>
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
 			<table>
 				<tr>
 					<td>
 						<form action = '/upload_file' method = 'post' enctype = "multipart/form-data">
 							{% csrf_token %}
 							{{ form }}
-<!-- 							<input type = 'file' name = 'foo' value = 'Load Files' multiple required>
-							<button type="submit" value="Submit">Upload</button> -->
+						<input type = 'file' name = 'foo' value = 'Load Files' multiple required>
+						<button type="submit" value="Submit">Upload</button>
 						</form>
 					</td>
 					<td>
@@ -63,7 +38,7 @@ input {
 				<br>
 					<tr>
 						<td>
-							<!-- <font color = 'red' size = '7'><%= file %></font> -->
+							
 						</td>
 <!-- 						<td>
 							<form action = '/delete_file' method = 'post'>
