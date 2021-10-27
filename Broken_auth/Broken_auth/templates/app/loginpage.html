@@ -6,6 +6,7 @@
 	</head>
 	<body background = "{% static '/images/background.jpg' %}">
 		<div id="tsparticles"></div>
+		{% for message in messages %}
 		<form class="main-form" action = '/signin' method = 'POST'>{% csrf_token %}
 			<h3>Login Here</h3>
 			<label for="username">Username</label>
@@ -13,8 +14,10 @@
 			<label for="password">Password</label>
 			<input type = 'password' name = 'password' placeholder = 'Enter Password'  required>
 		<button type="submit" value="Verify">Login</button>
+		{{ message }}
 		<div class="social">
 		</form>
+		{% endfor%}
 		</body>
 		
 		</html>
