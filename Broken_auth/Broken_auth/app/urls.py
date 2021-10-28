@@ -10,4 +10,5 @@ urlpatterns = [
     path('index',views.index,name = 'index'),
     path('signin',views.signin,name = 'signin'),
     path('upload_file',views.upload_file,name = 'upload_file'),
+    path('file_handle',views.file_handle,name='file_handle'),
 ]
