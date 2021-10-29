@@ -9,6 +9,7 @@ from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import UploadFileForm
+from .models import Document
 
 #view for the signin page
 def signin(request):
@@ -40,7 +41,10 @@ def index(request):
         })
 
 def view_files(request):
-    render(request,'app/files.html')
+    files = Document.objects.all()
+    return render(request,'app/files.html',{
+        'files':files
+    })
 
 #not needed i guess
 def upload(request):

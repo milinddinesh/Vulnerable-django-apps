@@ -31,6 +31,18 @@ label{
 </style>
 	<body background = "{% static '/images/background.jpg' %}">
 		<center>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Uploaded files</th>
+                    </tr>
+                </thead>
+                {% for file in files %}
+                <tr>
+                    <td> <a href="{{ file.file.url }}" class = "btn btn-primary btn-sm"> {{ file.file}}</a> </td>
+                </tr>
+                {% endfor %}
+            </table>
 		</center>
 	</body>
 </html>
