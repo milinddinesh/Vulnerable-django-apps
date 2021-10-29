@@ -17,37 +17,44 @@ input {
 button {
 	margin-top: 10px;
 	width: 90px;
-	margin-left: 90px;
+	margin-left: 15px;
+}
+
+form{
+	width:200px;
+	margin-left:10px
+}
+label{
+	position: relative;
+	top:250px;
 }
 </style>
 	<body background = "{% static '/images/background.jpg' %}">
 		<center>
-			<table>
+			<form method = 'post' enctype = "multipart/form-data">
+				{% csrf_token %}
+				{{ form }}
+			<!-- <input type = 'file' name = 'foo' value = 'Load Files' multiple required> -->
+			<button type="submit" value="Submit">Upload</button>
+			</form>
+<!-- 			<table>
 				<tr>
 					<td>
-						<form action = '/upload' method = 'post' enctype = "multipart/form-data">
-							{% csrf_token %}
-							{{ form }}
-						<input type = 'file' name = 'foo' value = 'Load Files' multiple required>
-						<button type="submit" value="Submit">Upload</button>
-						</form>
-					</td>
-					<td>
+
 					</td>
 				</tr>
-				<br>
 					<tr>
 						<td>
 							
 						</td>
-<!-- 						<td>
+						<td>
 							<form action = '/delete_file' method = 'post'>
 								<input type = 'hidden' name = 'delete_file' value = '<%= file %>'>
 								<input type = 'submit' value = 'Delete this File'>
 							</form>
-						</td> -->
+						</td>
 					</tr>
-			</table>
+			</table> -->
 		</center>
 	</body>
 </html>

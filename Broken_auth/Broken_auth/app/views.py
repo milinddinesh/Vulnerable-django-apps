@@ -28,7 +28,20 @@ def signin(request):
     return render(request,"app/loginpage.html")
 
 def index(request):
-    return render(request,"app/index.html")
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST,request.FILES)
+        if form.is_valid:
+            form.save()
+            return redirect('signin')
+    else:
+        form = UploadFileForm()
+    return render(request,'app/index.html',{
+        'form' : form
+        })
 
+#not needed i guess
 def upload(request):
-    return 
+    form = UploadFileForm()
+    return render(request,'app/index.html',{
+        form : form
+    })
