@@ -39,6 +39,9 @@ def index(request):
         'form' : form
         })
 
+def view_files(request):
+    render(request,'app/files.html')
+
 #not needed i guess
 def upload(request):
     form = UploadFileForm()
