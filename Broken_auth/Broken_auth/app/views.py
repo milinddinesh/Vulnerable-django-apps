@@ -40,12 +40,17 @@ def upload_file(request):
         
 
 def file_handle(request):
-    form = UploadFileForm
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST,request.FILES)
+        if form.is_valid :
+            form.save()
+            return redirect('index')
+    else :form = UploadFileForm()
     return render(request,'app/index.html',{
         form : form 
     })
 
-def upload_file(request):
+def upload_file(request):   
     context = {}
     upload_file = request.FILES['foo']
     fs = FileSystemStorage()

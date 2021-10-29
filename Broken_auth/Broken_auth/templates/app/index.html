@@ -25,7 +25,7 @@ button {
 			<table>
 				<tr>
 					<td>
-						<form action = '/upload_file' method = 'post' enctype = "multipart/form-data">
+						<form method = 'post' enctype = "multipart/form-data">
 							{% csrf_token %}
 							{{ form }}
 						<input type = 'file' name = 'foo' value = 'Load Files' multiple required>
