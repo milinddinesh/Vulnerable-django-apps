@@ -7,3 +7,40 @@ def upload_file(request):
     print(upload_file.name)
     HttpResponse("Your file was uploaded")
     return render(request,"clone/index.html")
+
+
+
+#function that handles the file upload feature
+def upload_file(request):
+    form = UploadFileForm(request.Post , request.Files)
+    if form.is_valid :
+        file_handle(request.FILES['file'])
+        
+
+def file_handle(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST,request.FILES)
+        if form.is_valid :
+            form.save()
+            return redirect('index')
+    else :form = UploadFileForm()
+    return render(request,'app/index.html',{
+        form : form 
+    })
+
+
+
+
+def upload_file(request):   
+    context = {}
+    upload_file = request.FILES['foo']
+    fs = FileSystemStorage()
+    #fs.save(upload_file.name,upload_file)
+    name = fs.save(upload_file.name,upload_file)
+    # document = FilesUpload.objects.create(file = upload_file)
+    # document.save()
+    print(upload_file.name)
+    context['url']=fs.url(name)
+    HttpResponse("Your file was uploaded")
+    return render(request,"clone/index.html",context)
+
