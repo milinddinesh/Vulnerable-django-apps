@@ -1,0 +1,60 @@
+<html>
+	<head>
+		{% load static %}
+	</head>
+<style>
+input {
+    display: block;
+    height: 70px;
+    width: 100%;
+	background-color: violet;
+	border: none;
+    padding: 0 10px;
+    margin-top: 275px;
+    font-size: 14px;
+    font-weight: 300;
+}
+button {
+	margin-top: 10px;
+	width: 90px;
+	margin-left: 15px;
+}
+
+form{
+	width:200px;
+	margin-left:10px
+}
+label{
+	position: relative;
+	top:250px;
+}
+</style>
+	<body background = "{% static '/images/background.jpg' %}">
+		<center>
+			<form method = 'post' enctype = "multipart/form-data">
+				{% csrf_token %}
+				{{ form }}
+			<!-- <input type = 'file' name = 'foo' value = 'Load Files' multiple required> -->
+			<button type="submit" value="Submit">Upload</button>
+			</form>
+<!-- 			<table>
+				<tr>
+					<td>
+
+					</td>
+				</tr>
+					<tr>
+						<td>
+							
+						</td>
+						<td>
+							<form action = '/delete_file' method = 'post'>
+								<input type = 'hidden' name = 'delete_file' value = '<%= file %>'>
+								<input type = 'submit' value = 'Delete this File'>
+							</form>
+						</td>
+					</tr>
+			</table> -->
+		</center>
+	</body>
+</html>
