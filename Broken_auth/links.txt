@@ -1,0 +1,42 @@
+https://stackoverflow.com/questions/24146619/django-user-specific-folders/24146732
+
+are these even relavant ?
+https://stackoverflow.com/questions/30679661/how-to-create-separate-folder-for-each-user-in-django-and-let-user-upload-file-i
+
+blog for the youtube tutorial i followed
+https://simpleisbetterthancomplex.com/tutorial/2016/08/01/how-to-upload-files-with-django.html
+
+official documentation for django file upload 
+https://docs.djangoproject.com/en/3.2/topics/http/file-uploads/
+
+Forms api
+https://docs.djangoproject.com/en/3.2/ref/forms/api/#binding-uploaded-files
+
+official docmentation for upload handlers
+https://docs.djangoproject.com/en/3.2/ref/files/uploads/
+
+make files private
+https://stackoverflow.com/questions/28007770/how-to-to-make-a-file-private-by-securing-the-url-that-only-authenticated-users
+
+https://stackoverflow.com/questions/54807631/assign-objects-to-specific-user-in-django
+
+Official docmentation for many to one relationships in django 
+https://docs.djangoproject.com/en/3.2/topics/db/examples/many_to_one/
+
+Restricting file access to specific users by x-sendfile
+https://stackoverflow.com/questions/28166784/restricting-access-to-private-file-downloads-in-django
+
+https://stackoverflow.com/questions/67269445/how-can-restrict-access-to-media-image-url-in-django
+
+video for user specific file access
+https://www.youtube.com/watch?v=SyhQDQ5Q6Js&t=527s&ab_channel=TechWithTim
+
+could also be the solution
+https://stackoverflow.com/questions/62058332/in-django-users-should-be-able-to-see-only-the-files-which-they-uploaded
+
+maybe you will need this for the solution 
+https://stackoverflow.com/questions/1190697/django-filefield-with-upload-to-determined-at-runtime
+
+official documentation for FileField properties
+https://docs.djangoproject.com/en/dev/ref/models/fields/#django.db.models.FileField.upload_to
+

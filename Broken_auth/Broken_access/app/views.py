@@ -10,6 +10,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import UploadFileForm
 from .models import Document
+from django.contrib.auth.decorators import login_required
 
 #view for the signin page
 def signin(request):
@@ -28,6 +29,7 @@ def signin(request):
             return redirect('signin')
     return render(request,"app/loginpage.html")
 
+@login_required(login_url='signin')
 def index(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST,request.FILES)
@@ -40,15 +42,9 @@ def index(request):
         'form' : form
         })
 
+@login_required(login_url='signin')
 def view_files(request):
     files = Document.objects.all()
     return render(request,'app/files.html',{
         'files':files
-    })
-
-#not needed i guess
-def upload(request):
-    form = UploadFileForm()
-    return render(request,'app/index.html',{
-        form : form
     })
