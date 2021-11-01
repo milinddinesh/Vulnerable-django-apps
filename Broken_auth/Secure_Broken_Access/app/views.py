@@ -12,6 +12,9 @@ from .forms import UploadFileForm
 from .models import Document
 from django.contrib.auth.decorators import login_required
 
+def home(request):
+    return render(request,"app/homepage.html")
+
 #view for the signup page
 def signup(request):
     #for the sign up form 

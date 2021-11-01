@@ -6,7 +6,7 @@ from django.conf import settings
 from . import views
 
 urlpatterns = [
-    path('',views.signin, name = 'signin'),
+    path('',views.signin, name = 'home'),
     path('index',views.index,name = 'index'),
     path('signin',views.signin,name = 'signin'),
     #path('upload',views.upload,name = 'upload'),
