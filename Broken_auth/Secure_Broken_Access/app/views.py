@@ -12,6 +12,28 @@ from .forms import UploadFileForm
 from .models import Document
 from django.contrib.auth.decorators import login_required
 
+#view for the signup page
+def signup(request):
+    #for the sign up form 
+    if request.method == "POST":
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        password = request.POST.get('password')
+        r_password = request.POST.get('check_password')
+
+        if password == r_password :
+            myuser = User.objects.create_user(username , email, password)
+            myuser.first_name = firstname
+            myuser.last_name = lastname
+
+            myuser.save()
+            messages.success(request,"User created successfully")
+            return redirect('signin')
+
+    return render(request,"app/signuppage.html")
+
 #view for the signin page
 def signin(request):
     #for the login form 
