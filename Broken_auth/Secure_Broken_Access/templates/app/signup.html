@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+	<head>
+		<link rel="stylesheet" href="{% static 'login.css' %}">
+	</head>
+	<style>
+		.main-form{
+			height: 720px !important;
+		}
+	</style>
+	<body background = "{% static '/images/background.jpg' %}">
+		<div id="tsparticles"></div>
+		<form class="main-form" action = '/signup' method = 'post'>{% csrf_token %}
+			<h3>SignUp Form</h3>
+			<label for="username">Username</label>
+			<input type = 'text' name = 'username' placeholder = 'Enter Username'  required>
+		
+			<label for="email">Email</label>
+			<input type = 'email' name = 'email' placeholder = 'Enter Email' required>
+
+			<label for="password">Password</label>
+			<input type = 'password' name = 'password' placeholder = 'Enter Password'  required>
+
+			<label for="password">Re-check Password</label>
+			<input type = 'password' name = 'check_password' placeholder = 'Re-Enter Password'  required>
+
+		<button type = 'submit' value = 'Submit'>
+			Signup</button>
+		<div>
+			<form action = '/signin' method = 'get'>
+				<input type = 'submit' value = 'Login'>
+			</form>
+		</div>			
+		</form>
+	</body>
+</html>

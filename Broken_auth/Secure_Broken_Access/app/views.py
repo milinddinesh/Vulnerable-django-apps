@@ -33,7 +33,9 @@ def signin(request):
 def index(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST,request.FILES)
+        # form.user = request.user
         if form.is_valid:
+            form.user = request.user
             form.save()
             return redirect('signin')
     else:
@@ -44,7 +46,12 @@ def index(request):
 
 @login_required(login_url='signin')
 def view_files(request):
-    files = Document.objects.all()
+    files = Document.objects.filter(user = request.user)
+    print('out loop')
+    print(files)
+    for file in files:
+        print('in loop')
+        print(file.user)
     return render(request,'app/files.html',{
         'files':files
     })
