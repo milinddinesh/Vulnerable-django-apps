@@ -12,6 +12,7 @@ from .forms import UploadFileForm
 from .models import Document
 from django.contrib.auth.decorators import login_required
 
+
 def home(request):
     return render(request,"app/homepage.html")
 
@@ -30,18 +31,15 @@ def signup(request):
             myuser = User.objects.create_user(username , email, password)
             myuser.first_name = firstname
             myuser.last_name = lastname
-
             myuser.save()
             messages.success(request,"User created successfully")
             return redirect('signin')
 
-    return render(request,"app/signuppage.html")
+    return render(request,"app/signup.html")
 
 #view for the signin page
 def signin(request):
-    #for the login form 
     if request.method == 'POST':
-        #Values obtained form the form 
         username = request.POST['username']
         passw = request.POST['password']
 
@@ -54,15 +52,17 @@ def signin(request):
             return redirect('signin')
     return render(request,"app/loginpage.html")
 
+#also the page where the upload happens.
 @login_required(login_url='signin')
 def index(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST,request.FILES)
-        # form.user = request.user
         if form.is_valid:
-            form.user = request.user
-            form.save()
-            return redirect('signin')
+            saved_form = form.save(commit=False)
+            saved_form.username = User.objects.get(username = request.user)
+            print(saved_form.username)
+            saved_form.save()
+            return redirect('index')
     else:
         form = UploadFileForm()
     return render(request,'app/index.html',{
@@ -71,12 +71,13 @@ def index(request):
 
 @login_required(login_url='signin')
 def view_files(request):
-    files = Document.objects.filter(user = request.user)
-    print('out loop')
-    print(files)
+    files = Document.objects.filter(username= request.user) #supposed to print the files of the current user but is not
+    # files = Document.objects.all() #this works but prints all the files .
+    print('out loop') #just to test
+    #print(files)
     for file in files:
         print('in loop')
-        print(file.user)
+        print(file.username)
     return render(request,'app/files.html',{
         'files':files
     })
