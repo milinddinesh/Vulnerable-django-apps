@@ -12,14 +12,33 @@ from .forms import UploadFileForm
 from .models import Document
 from django.contrib.auth.decorators import login_required
 
-#view for the signin page
+def home(request):
+    return render(request,"app/homepage.html")
+
+def signup(request):
+    #for the sign up form
+    if request.method == "POST":
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        firstname = request.POST.get('firstname')
+        lastname = request.POST.get('lastname')
+        password = request.POST.get('password')
+        r_password = request.POST.get('check_password')
+
+        if password == r_password :
+            myuser = User.objects.create_user(username , email, password)
+            myuser.first_name = firstname
+            myuser.last_name = lastname
+            myuser.save()
+            messages.success(request,"User created successfully")
+            return redirect('signin')
+
+    return render(request,"app/signup.html")
+
 def signin(request):
-    #for the login form 
-    if request.method == 'POST':
-        #Values obtained form the form 
+    if request.method == 'POST': 
         username = request.POST['username']
         passw = request.POST['password']
-
         user = authenticate(username = username,password = passw)
         if user is not None:
             login(request,user)
@@ -29,7 +48,6 @@ def signin(request):
             return redirect('signin')
     return render(request,"app/loginpage.html")
 
-@login_required(login_url='signin')
 def index(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST,request.FILES)
@@ -42,7 +60,6 @@ def index(request):
         'form' : form
         })
 
-@login_required(login_url='signin')
 def view_files(request):
     files = Document.objects.all()
     return render(request,'app/files.html',{
