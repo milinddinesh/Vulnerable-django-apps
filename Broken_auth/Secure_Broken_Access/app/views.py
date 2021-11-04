@@ -52,15 +52,16 @@ def signin(request):
             return redirect('signin')
     return render(request,"app/loginpage.html")
 
-#also the page where the upload happens.
-@login_required(login_url='signin')
+#the page where the upload happens.
+@login_required(login_url='signin') #we add this to make sure that unauthenticated users cannot access the views
 def index(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST,request.FILES)
         if form.is_valid:
             saved_form = form.save(commit=False)
-            saved_form.username = User.objects.get(username = request.user)
-            print(saved_form.username)
+
+            #We retrieve the username of the current user from the User model and pass it to the form .
+            saved_form.username = User.objects.get(username = request.user) 
             saved_form.save()
             return redirect('index')
     else:
@@ -71,12 +72,9 @@ def index(request):
 
 @login_required(login_url='signin')
 def view_files(request):
-    files = Document.objects.filter(username= request.user) #supposed to print the files of the current user but is not
-    # files = Document.objects.all() #this works but prints all the files .
-    print('out loop') #just to test
-    #print(files)
+    #filters the Document objects based on the username so that only the current user's files are displayed
+    files = Document.objects.filter(username= request.user) 
     for file in files:
-        print('in loop')
         print(file.username)
     return render(request,'app/files.html',{
         'files':files
