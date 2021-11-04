@@ -1,12 +1,8 @@
 from django.shortcuts import render
-from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
 from django.contrib.auth.models import User 
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from django.core.files.storage import FileSystemStorage
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from .forms import UploadFileForm
 from .models import Document
