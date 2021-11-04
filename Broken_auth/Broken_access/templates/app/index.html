@@ -28,6 +28,10 @@ label{
 	position: relative;
 	top:250px;
 }
+div{
+	position: relative;
+	margin-left: 100px;
+}
 </style>
 	<body background = "{% static '/images/background.jpg' %}">
 		<center>
@@ -37,7 +41,7 @@ label{
 			<!-- <input type = 'file' name = 'foo' value = 'Load Files' multiple required> -->
 			<button type="submit" value="Submit">Upload</button>
 			</form>
-<!-- 			<table>
+			<table>
 				<tr>
 					<td>
 
@@ -48,13 +52,14 @@ label{
 							
 						</td>
 						<td>
-							<form action = '/delete_file' method = 'post'>
-								<input type = 'hidden' name = 'delete_file' value = '<%= file %>'>
-								<input type = 'submit' value = 'Delete this File'>
+							<div id='button'>
+							<form action = '/files' method = 'get'> {% csrf_token %}
+								<button type="submit" value="Submit">View Files</button>
 							</form>
+							</div>
 						</td>
 					</tr>
-			</table> -->
+			</table>
 		</center>
 	</body>
 </html>

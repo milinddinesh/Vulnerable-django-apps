@@ -53,7 +53,7 @@ def index(request):
         form = UploadFileForm(request.POST,request.FILES)
         if form.is_valid:
             form.save()
-            return redirect('signin')
+            return redirect('index')
     else:
         form = UploadFileForm()
     return render(request,'app/index.html',{
