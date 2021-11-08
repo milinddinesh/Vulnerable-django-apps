@@ -70,8 +70,6 @@ def index(request):
 def view_files(request):
     #filters the Document objects based on the username so that only the current user's files are displayed
     files = Document.objects.filter(username= request.user) 
-    for file in files:
-        print(file.username)
     return render(request,'app/files.html',{
         'files':files
     })
