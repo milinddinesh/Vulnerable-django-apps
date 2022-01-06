@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+	<head>
+		<link rel="stylesheet" href="{% static 'login.css' %}" >
+	</head>
+	<style>
+		.main-form{
+			height: 320px !important;
+		}
+	</style>
+	<body background="{% static '/images/background.jpg' %}">
+		<div id="tsparticles"></div>
+		<div class="main-form">
+			<h3>Reset Password</h3>
+			<form action = '/reset' method = 'post'>
+				{% csrf_token %}
+				<label for="email">Email</label>
+				<input type = 'email' name = 'email' placeholder = 'Enter Email'  required>
+				<input type = 'submit' value = 'Reset' class="reset-button">
+				{% for message in messages %}
+				<div class="alert alert-success">
+					<a class="close" href="#" data-dismiss="alert">×</a>
+					   {{ message }}
+				</div>
+				{% endfor %}
+			</form>
+		</div>			
+		</form>
+	</body>
+</html>

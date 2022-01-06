@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+	<head>
+		<link rel = "stylesheet" href = "{% static 'login.css' %}">
+	</head>
+	<body background = "{% static '/images/background.jpg' %}">
+		<div id="tsparticles"></div>
+		<form class="main-form" action = '/signin' method = 'POST'>
+			{% csrf_token %}
+			<h3>Login Here</h3>
+			<label for="username">Username</label>
+			<input type = 'text' name = 'username' placeholder = 'Enter Username'  required>
+			<label for="password">Password</label>
+			<input type = 'password' name = 'password' placeholder = 'Enter Password'  required>
+			<button type="submit" value="Verify">Login</button>
+			{% for message in messages %}
+    		<div class="alert alert-success">
+        		<a class="close" href="#" data-dismiss="alert">×</a>
+           		{{ message }}
+    		</div>
+			{% endfor %}
+		</form>
+	</body>
+</html>
