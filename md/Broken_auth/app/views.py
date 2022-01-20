@@ -12,14 +12,6 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth.models import Group
 
-def setCookie(request):
-    response.set_cookie('user',request.user)
-    response.set_cookie('id',request.user.id)
-    print('cookie set')
-    return response
-
-def showCookie(request):
-    print(request.COOKIES['id'])
 
 def home(request):
     return render(request,"app/homepage.html")
