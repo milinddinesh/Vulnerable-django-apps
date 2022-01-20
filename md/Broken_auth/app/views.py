@@ -1,3 +1,5 @@
+import re
+from urllib import response
 from django.shortcuts import render
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User 
@@ -7,12 +9,21 @@ from django.shortcuts import render
 from .forms import UploadFileForm
 from .models import Document
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.contrib.auth.models import Group
 
+def setCookie(request):
+    response.set_cookie('user',request.user)
+    response.set_cookie('id',request.user.id)
+    print('cookie set')
+    return response
+
+def showCookie(request):
+    print(request.COOKIES['id'])
 
 def home(request):
     return render(request,"app/homepage.html")
 
-#view for the signup page
 def signup(request):
     #for the sign up form 
     if request.method == "POST":
@@ -24,16 +35,17 @@ def signup(request):
         r_password = request.POST.get('check_password')
 
         if password == r_password :
+            id = 10
             myuser = User.objects.create_user(username , email, password)
             myuser.first_name = firstname
             myuser.last_name = lastname
+            # myuser.id = 12348
             myuser.save()
             messages.success(request,"User created successfully")
             return redirect('signin')
 
     return render(request,"app/signup.html")
 
-#view for the signin page
 def signin(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -48,41 +60,43 @@ def signin(request):
             return redirect('signin')
     return render(request,"app/loginpage.html")
 
-#the page where the upload happens.
-@login_required(login_url='signin') #we add this to make sure that unauthenticated users cannot access the views
+@login_required(login_url='signin') 
 def index(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST,request.FILES)
         if form.is_valid:
             saved_form = form.save(commit=False)
-
-            #We retrieve the username of the current user from the User model and pass it to the form .
             saved_form.username = User.objects.get(username = request.user) 
             saved_form.save()
             return redirect('index')
     else:
         form = UploadFileForm()
-    return render(request,'app/index.html',{
+        response = HttpResponse()
+        response = render(request,'app/index.html',{
         'form' : form
         })
+        response.set_cookie('id',123)
+        return response
+    # return render(request,'app/index.html',{
+    #     'form' : form
+    #     })
 
 @login_required(login_url='signin')
 def view_files(request):
-    #filters the Document objects based on the username so that only the current user's files are displayed
     files = Document.objects.filter(username= request.user) 
+    print(request.COOKIES['id'])
     return render(request,'app/files.html',{
         'files':files
     })
 
 def reset(request):
     if request.method == 'POST':
-        print('test')
         email = request.POST['email']
-        print(email)
         try:
             user = User.objects.get(email= email)
         except User.DoesNotExist:
             messages.error(request,"Account with email does not exist.  ")
             return render(request,"app/reset.html")
+    else :
+        return render(request,"app/reset.html")
 
-    return render(request,"app/reset.html")
