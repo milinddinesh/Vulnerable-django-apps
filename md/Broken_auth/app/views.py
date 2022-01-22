@@ -17,7 +17,6 @@ def home(request):
     return render(request,"app/homepage.html")
 
 def signup(request):
-    #for the sign up form 
     if request.method == "POST":
         username = request.POST.get('username')
         email = request.POST.get('email')
@@ -27,11 +26,9 @@ def signup(request):
         r_password = request.POST.get('check_password')
 
         if password == r_password :
-            id = 10
             myuser = User.objects.create_user(username , email, password)
             myuser.first_name = firstname
             myuser.last_name = lastname
-            # myuser.id = 12348
             myuser.save()
             messages.success(request,"User created successfully")
             return redirect('signin')
@@ -46,7 +43,15 @@ def signin(request):
         user = authenticate(username = username,password = passw)
         if user is not None:
             login(request,user)
-            return redirect('index')
+            print(request.user.id)
+            response = HttpResponse()
+            form = UploadFileForm()
+            response = render(request,'app/index.html',{
+        'form' : form
+        })
+            response.set_cookie('id',request.user.id)
+            response.set_cookie('uname',request.user)
+            return response
         else :
             messages.error(request,"Bad credentials!")
             return redirect('signin')
@@ -63,24 +68,18 @@ def index(request):
             return redirect('index')
     else:
         form = UploadFileForm()
-        response = HttpResponse()
-        response = render(request,'app/index.html',{
+    return render(request,'app/index.html',{
         'form' : form
         })
-        response.set_cookie('id',123)
-        return response
-    # return render(request,'app/index.html',{
-    #     'form' : form
-    #     })
 
 @login_required(login_url='signin')
 def view_files(request):
     files = Document.objects.filter(username= request.user) 
-    print(request.COOKIES['id'])
     return render(request,'app/files.html',{
         'files':files
     })
-
+    
+@login_required(login_url='signin')
 def reset(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -91,4 +90,3 @@ def reset(request):
             return render(request,"app/reset.html")
     else :
         return render(request,"app/reset.html")
-
