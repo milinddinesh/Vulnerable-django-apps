@@ -74,6 +74,7 @@ def index(request):
 
 @login_required(login_url='signin')
 def view_files(request):
+    print(request.user.id)
     files = Document.objects.filter(username= request.user) 
     return render(request,'app/files.html',{
         'files':files
@@ -82,12 +83,13 @@ def view_files(request):
 @login_required(login_url='signin')
 def reset(request):
     if request.method == 'POST':
-        uname = request.POST['username']
-        try:
-            user = User.objects.get(username = uname)
-            return render(request,"app/reset.html")
-        except User.DoesNotExist:
-            messages.error(request,"Account with username does not exist.")
-            return render(request,"app/reset.html")
+        if request.COOKIES['id'] == 3 and request.COOKIES['uname'] == 'admin':
+            uname = request.POST['username']
+            try:
+                user = User.objects.get(username = uname)
+                return render(request,"app/reset.html")
+            except User.DoesNotExist:
+                messages.error(request,"Account with username does not exist.")
+                return render(request,"app/reset.html")
     else :
         return render(request,"app/reset.html")
