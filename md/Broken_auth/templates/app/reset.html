@@ -16,7 +16,7 @@
 			<form action = '/reset' method = 'post'>
 				{% csrf_token %}
 				<label for="email">Email</label>
-				<input type = 'email' name = 'email' placeholder = 'Enter Email'  required>
+				<input type = 'username' name = 'username' placeholder = 'Enter Username'  required>
 				<input type = 'submit' value = 'Reset' class="reset-button">
 				{% for message in messages %}
 				<div class="alert alert-success">
