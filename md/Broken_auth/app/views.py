@@ -91,5 +91,9 @@ def reset(request):
             except User.DoesNotExist:
                 messages.error(request,"Account with username does not exist.")
                 return render(request,"app/reset.html")
+        else :
+            return render(request,"app/403.html")
     else :
-        return render(request,"app/reset.html")
+        if request.COOKIES['id'] == 3 and request.COOKIES['uname'] == 'admin':
+            return render(request,"app/reset.html")
+        else : return render(request,"app/403.html")
