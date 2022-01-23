@@ -82,11 +82,12 @@ def view_files(request):
 @login_required(login_url='signin')
 def reset(request):
     if request.method == 'POST':
-        email = request.POST['email']
+        uname = request.POST['username']
         try:
-            user = User.objects.get(email= email)
+            user = User.objects.get(username = uname)
+            return render(request,"app/reset.html")
         except User.DoesNotExist:
-            messages.error(request,"Account with email does not exist.  ")
+            messages.error(request,"Account with username does not exist.")
             return render(request,"app/reset.html")
     else :
         return render(request,"app/reset.html")
