@@ -43,7 +43,6 @@ def signin(request):
         user = authenticate(username = username,password = passw)
         if user is not None:
             login(request,user)
-            print(request.user.id)
             response = HttpResponse()
             form = UploadFileForm()
             response = render(request,'app/index.html',{
@@ -74,7 +73,6 @@ def index(request):
 
 @login_required(login_url='signin')
 def view_files(request):
-    print(request.user.id)
     files = Document.objects.filter(username= request.user) 
     return render(request,'app/files.html',{
         'files':files
@@ -83,7 +81,7 @@ def view_files(request):
 @login_required(login_url='signin')
 def reset(request):
     if request.method == 'POST':
-        if request.COOKIES['id'] == 3 and request.COOKIES['uname'] == 'admin':
+        if request.COOKIES['id'] == '3' and request.COOKIES['uname'] == 'admin':
             uname = request.POST['username']
             try:
                 user = User.objects.get(username = uname)
@@ -94,6 +92,8 @@ def reset(request):
         else :
             return render(request,"app/403.html")
     else :
-        if request.COOKIES['id'] == 3 and request.COOKIES['uname'] == 'admin':
+        if request.COOKIES['id'] == '3' and request.COOKIES['uname'] == 'admin':
             return render(request,"app/reset.html")
-        else : return render(request,"app/403.html")
+        else :
+            return render(request,"app/403.html")
+            
