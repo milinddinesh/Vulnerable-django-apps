@@ -82,13 +82,15 @@ def view_files(request):
 def reset(request):
     if request.method == 'POST':
         if request.COOKIES['id'] == '3' and request.COOKIES['uname'] == 'admin':
-            uname = request.POST['username']
-            try:
-                user = User.objects.get(username = uname)
-                return render(request,"app/reset.html")
-            except User.DoesNotExist:
-                messages.error(request,"Account with username does not exist.")
-                return render(request,"app/reset.html")
+            if request.user.is_authenticated():
+                uname = request.POST['username']
+                try:
+                    user = User.objects.get(username = uname)
+                    return render(request,"app/reset.html")
+                except User.DoesNotExist:
+                    messages.error(request,"Account with username does not exist.")
+                    return render(request,"app/reset.html")
+            else : return render(request,"app/403.html")
         else :
             return render(request,"app/403.html")
     else :

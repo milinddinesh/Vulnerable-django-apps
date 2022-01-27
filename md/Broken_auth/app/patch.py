@@ -1,4 +1,3 @@
-import re
 from urllib import response
 from django.shortcuts import render
 from django.shortcuts import redirect, render
@@ -43,14 +42,11 @@ def signin(request):
         user = authenticate(username = username,password = passw)
         if user is not None:
             login(request,user)
-            response = HttpResponse()
+            request.session['id'] = request.user.id
+            request.session['uname'] = request.user.username
             form = UploadFileForm()
-            response = render(request,'app/index.html',{
-        'form' : form
-        })
-            response.set_cookie('id',request.user.id)
-            response.set_cookie('uname',request.user)
-            return response
+            return render(request,'app/index.html',{
+        'form' : form })
         else :
             messages.error(request,"Bad credentials!")
             return redirect('signin')
@@ -81,19 +77,23 @@ def view_files(request):
 @login_required(login_url='signin')
 def reset(request):
     if request.method == 'POST':
-        if request.COOKIES['id'] == '3' and request.COOKIES['uname'] == 'admin':
-            uname = request.POST['username']
-            try:
-                user = User.objects.get(username = uname)
-                return render(request,"app/reset.html")
-            except User.DoesNotExist:
-                messages.error(request,"Account with username does not exist.")
-                return render(request,"app/reset.html")
+        if request.user.is_authenticated():
+            if request.session.get('id') == 3 and request.session.get('uname') == 'admin':
+                uname = request.POST['username']
+                try:
+                    user = User.objects.get(username = uname)
+                    return render(request,"app/reset.html")
+                except User.DoesNotExist:
+                    messages.error(request,"Account with username does not exist.")
+                    return render(request,"app/reset.html")
+            else :
+                return render(request,"app/403.html")
         else :
             return render(request,"app/403.html")
     else :
-        if request.COOKIES['id'] == '3' and request.COOKIES['uname'] == 'admin':
-            return render(request,"app/reset.html")
+        if request.session.get('id') == 3 and request.session.get('uname') == 'admin':
+            if request.user.is_authenticated:
+                return render(request,"app/reset.html")
         else : 
             return render(request,"app/403.html")
             
