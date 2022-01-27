@@ -77,7 +77,7 @@ def view_files(request):
 @login_required(login_url='signin')
 def reset(request):
     if request.method == 'POST':
-        if request.user.is_authenticated():
+        if request.user.is_authenticated and request.user.groups.filter(name__in=['mods']).exists():
             if request.session.get('id') == 3 and request.session.get('uname') == 'admin':
                 uname = request.POST['username']
                 try:
@@ -92,7 +92,7 @@ def reset(request):
             return render(request,"app/403.html")
     else :
         if request.session.get('id') == 3 and request.session.get('uname') == 'admin':
-            if request.user.is_authenticated:
+            if request.user.is_authenticated and request.user.groups.filter(name__in=['mods']).exists():
                 return render(request,"app/reset.html")
         else : 
             return render(request,"app/403.html")
