@@ -11,7 +11,7 @@ from . import patch
 #     path('signin',views.signin,name = 'signin'),
 #     path('files',views.view_files,name = 'view_files'),
 #     path('signup',views.signup,name = 'signup'),
-#     path('reset',views.reset,name='rest'),
+#     path('reset',views.reset,name='reset'),
 # ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns = [
@@ -20,5 +20,5 @@ urlpatterns = [
     path('signin',patch.signin,name = 'signin'),
     path('files',patch.view_files,name = 'view_files'),
     path('signup',patch.signup,name = 'signup'),
-    path('reset',patch.reset,name='rest'),
+    path('reset',patch.reset,name='reset'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

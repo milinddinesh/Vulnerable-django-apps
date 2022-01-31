@@ -42,6 +42,7 @@ def signin(request):
         user = authenticate(username = username,password = passw)
         if user is not None:
             login(request,user)
+            print(request.user)
             request.session['id'] = request.user.id
             request.session['uname'] = request.user.username
             form = UploadFileForm()
@@ -91,7 +92,10 @@ def reset(request):
         else :
             return render(request,"app/403.html")
     else :
+        print(request.user)
+        print(request.session.get('id'))
         if request.session.get('id') == 3 and request.session.get('uname') == 'admin':
+            print('inside')
             if request.user.is_authenticated and request.user.groups.filter(name__in=['mods']).exists():
                 return render(request,"app/reset.html")
         else : 

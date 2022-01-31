@@ -94,6 +94,7 @@ def reset(request):
         else :
             return render(request,"app/403.html")
     else :
+        print(request.COOKIES['id'])
         if request.COOKIES['id'] == '3' and request.COOKIES['uname'] == 'admin':
             return render(request,"app/reset.html")
         else : 
